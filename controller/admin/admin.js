@@ -1,5 +1,5 @@
 // const Add
-
+const AddressComponent = require('../../prototype/addressComponent')
 
 class Admin extends AddressComponent {
     constructor() {
@@ -11,3 +11,5 @@ class Admin extends AddressComponent {
         ctx.body = '<h1>登录</h1>'
     }
 }
+
+module.exports = new Admin()

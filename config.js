@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
     DB_HOST: 'localhost',
     DB_USER: 'root',
@@ -10,5 +11,14 @@ module.exports = {
     HTTP_ROOT: 'http://localhost:8080',
     //HTTP_ROOT: 'https://www.aaa.com',
 
-    UPLOAD_DIR: path.resolve(__dirname, './public/upload')
+    UPLOAD_DIR: path.resolve(__dirname, './public/upload'),
+    session: {
+		name: 'SID',
+		secret: 'SID',
+		cookie: {
+			httpOnly: true,
+	    secure:   false,
+	    maxAge:   365 * 24 * 60 * 60 * 1000,
+		}
+	}
 }

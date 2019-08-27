@@ -40,7 +40,7 @@ app.use(session({
     signed: true,
     rolling: false,
     renew: true
-}))
+}, app))
 
 app.context.db = db
 app.context.config = config
@@ -51,4 +51,8 @@ app.use(router.routes())
 app.use(static('./public', {
     maxAge: 24 * 60 * 60 * 1000
 }))
+
+app.listen(8080, () => {
+    console.log('已监听在8080端口')
+})
 

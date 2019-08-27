@@ -3,4 +3,4 @@ apps:
     instance: 2
     watch: true
     env:
-      NODE_env: production
+      NODE_ENV: production

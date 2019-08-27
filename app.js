@@ -4,7 +4,7 @@ const config = require('./config')
 const db = require('./database/mysql')
 const session = require('koa-session')
 const body = require('koa-better-body')
-const history = require('koa2-connect-history-api-fallback')
+const { history } = require('koa2-connect-history-api-fallback')
 const static = require('koa-static')
 const chalk = require('chalk')
 

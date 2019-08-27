@@ -45,3 +45,10 @@ app.use(session({
 app.context.db = db
 app.context.config = config
 
+router.use('/admin', require('./routes/admin'))
+app.use(router.routes())
+
+app.use(static('./public', {
+    maxAge: 24 * 60 * 60 * 1000
+}))
+

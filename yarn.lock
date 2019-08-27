@@ -1577,9 +1577,9 @@ koa-convert@^1.2.0:
     koa-compose "^3.0.0"
 
 koa-history-api@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/koa-history-api/-/koa-history-api-1.0.2.tgz#e0eb546a2f91f03903492a8be1d1cb402916b373"
-  integrity sha512-6da2w05UOIaJBtmL6Mt1pIG1NJ4qkFY9hmOMezeZtAO971hshctmFsO6qjtSh0kSFquv4tBOtrAdO+7xG7cVPQ==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/koa-history-api/-/koa-history-api-1.0.3.tgz#21dfd4fd2b0a7b179a5b03e0dfdc700a69dd8331"
+  integrity sha512-d52991D7WmfyUBXgqZjSYmFWkqT4E3EQ4kYzRXmlsdBjsF22bMV5WR5drwX4lRXKhnm5Ron5PGOETruinEqpkg==
 
 koa-is-json@^1.0.0:
   version "1.0.0"

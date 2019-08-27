@@ -4,7 +4,7 @@ const config = require('./config')
 const db = require('./database/mysql')
 const session = require('koa-session')
 const body = require('koa-better-body')
-const { historyApiFallback } = require('koa2-connect-history-api-fallback')
+const history = require('koa-history-api')
 const static = require('koa-static')
 const chalk = require('chalk')
 
@@ -48,7 +48,7 @@ app.context.config = config
 router.use('/admin', require('./routes/admin'))
 app.use(router.routes())
 
-app.use(historyApiFallback())
+app.use(history())
 // app.use((ctx, next) => {
 
 // })

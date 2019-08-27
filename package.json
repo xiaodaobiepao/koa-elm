@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon app.js",
-    "prod": "cross-env NODE_ENV=production nodemon app.js"
+    "prod": "cross-env NODE_ENV=production nodemon app.js",
+    "deploy": "pm2 start process.yml",
+    "stop": "pm2 stop app"
   },
   "devDependencies": {
     "chalk": "^2.4.2",

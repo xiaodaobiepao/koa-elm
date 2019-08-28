@@ -89,7 +89,7 @@ module.exports = class BaseComponent {
     }
 
     async getPath(ctx) {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             console.log(ctx.request)
             const files = ctx.request.field.src
             const fields = ctx.request.field
@@ -140,7 +140,7 @@ module.exports = class BaseComponent {
     }
 
     async qiniu(ctx, type = 'default') {
-      return new Promise((resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         let img_id
         const files = ctx.request.field.src
         try {

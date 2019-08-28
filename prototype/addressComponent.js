@@ -16,7 +16,7 @@ class AddressComponent extends BaseComponent {
 		// this.baidukey2 = 'fjke3YUipM9N64GdOIh1DNeK2APO2WcT';
 	}
 	//获取定位地址
-	async guessPosition(req){
+	async guessPosition(ctx){
 		return new Promise(async (resolve, reject) => {
 			let ip;
 			const defaultIp = '180.158.102.141';

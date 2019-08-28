@@ -1,15 +1,14 @@
 const Koa = require('koa')
-const Router = require('koa-router')
+// const Router = require('koa-router')
 const config = require('./config')
 const db = require('./database/mongodb')
 const session = require('koa-session')
 const body = require('koa-better-body')
 const history = require('koa-history-api')
-const static = require('koa-static')
 const chalk = require('chalk')
+const router = require('./routes/index')
 
 const app = new Koa()
-const router = new Router()
 
 app.removeAllListeners('*', (ctx, next) => {
     const { origin, Origin, referer, Referer } = req.headers
@@ -45,13 +44,10 @@ app.use(session({
 app.context.db = db
 app.context.config = config
 
-router.use('/admin', require('./routes/admin'))
-app.use(router.routes())
+app.use(router)
 
-app.use(history())
-// app.use((ctx, next) => {
 
-// })
+app.use(history({index: '/element/index.html'}))
 
 app.use(static('./public', {
     maxAge: 24 * 60 * 60 * 1000

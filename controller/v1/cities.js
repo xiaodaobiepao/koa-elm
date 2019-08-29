@@ -37,3 +37,5 @@ class City extends AddressComponent {
         }
     }
 }
+
+module.exports = new City()

@@ -5,9 +5,9 @@ class Admin extends AddressComponent {
     constructor() {
         super()
         this.login = this.login.bind(this)
-        this.register = this.register.bind(this)
-        this.encryption = this.encryption.bind(this)
-        this.updateAvatar = this.updateAvatar(this)
+        // this.register = this.register.bind(this)
+        // this.encryption = this.encryption.bind(this)
+        // this.updateAvatar = this.updateAvatar(this)
     }
     async login(ctx, next) {
         // ctx.type = 'html'
@@ -36,7 +36,7 @@ class Admin extends AddressComponent {
             const cityInfo = await this.guessPosition(ctx)
             const newAdmin = {
                 user_name,
-                
+
             }
           }
       } catch (error) {

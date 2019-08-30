@@ -19,17 +19,20 @@ class AddressComponent extends BaseComponent {
 	async guessPosition(ctx){
 		return new Promise(async (resolve, reject) => {
 			let ip;
-			const defaultIp = '180.158.102.141';
+			const defaultIp = '180.158.102.141'; // 上海
 	 		if (process.env.NODE_ENV == 'development') {
 	 			ip = defaultIp;
 	 		} else {
 	 			try {
-					ip = req.headers['x-forwarded-for'] || 
-			 		req.connection.remoteAddress || 
-			 		req.socket.remoteAddress ||
-			 		req.connection.socket.remoteAddress;
-			 		const ipArr = ip.split(':');
-			 		ip = ipArr[ipArr.length -1] || defaultIp;
+                    console.log(ctx.connection)
+					// ip = ctx.headers['x-forwarded-for'] || 
+			 		// ctx.connection.remoteAddress || 
+			 		// ctx.socket.remoteAddress ||
+			 		// ctx.connection.socket.remoteAddress;
+			 		// const ipArr = ip.split(':');
+                     // ip = ipArr[ipArr.length -1] || defaultIp;
+                     console.log(ctx.ip)
+                     ip = ctx.ip
 				} catch (e) {
 					ip = defaultIp;
 				}
@@ -142,14 +145,16 @@ class AddressComponent extends BaseComponent {
 		}
 	}
 	//通过ip地址获取精确位置
-	async geocoder(req){
+	async geocoder(ctx){
+        // 先根据ip获取精确位置
+        // 在根据获取到的经纬度地址获取附近地名
 		try{
-			const address = await this.guessPosition(req);
+			const address = await this.guessPosition(req); // 根据ip获取经纬度，城市信息
 			const params = {
 				key: this.tencentkey,
 				location: address.lat + ',' + address.lng
 			};
-			let res = await this.fetch('http://apis.map.qq.com/ws/geocoder/v1/', params);
+			let res = await this.fetch('http://apis.map.qq.com/ws/geocoder/v1/', params); // 根据经纬度
 			if (res.status != 0) {
 				params.key = this.tencentkey2;
 	 			res = await this.fetch('http://apis.map.qq.com/ws/geocoder/v1/', params);

@@ -149,7 +149,7 @@ class AddressComponent extends BaseComponent {
         // 先根据ip获取精确位置
         // 在根据获取到的经纬度地址获取附近地名
 		try{
-			const address = await this.guessPosition(req); // 根据ip获取经纬度，城市信息
+			const address = await this.guessPosition(ctx); // 根据ip获取经纬度，城市信息
 			const params = {
 				key: this.tencentkey,
 				location: address.lat + ',' + address.lng

@@ -12,13 +12,13 @@ const router = require('./routes/index')
 const app = new Koa()
 
 app.removeAllListeners('*', (ctx, next) => {
-    const { origin, Origin, referer, Referer } = req.headers
-    const allowOrigin = origin || Origin || referer || Referer || '*'
-    ctx.set('Access-Control-Allow-Origin', allowOrigin)
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-    ctx.set('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
-    ctx.set('Access-Control-Allow-Credentials', true)
-    ctx.set('X-Powered-By', 'Express')
+    // const { origin, Origin, referer, Referer } = req.headers
+    // const allowOrigin = origin || Origin || referer || Referer || '*'
+    // ctx.set('Access-Control-Allow-Origin', allowOrigin) // 允许跨域
+    // ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+    // ctx.set('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+    // ctx.set('Access-Control-Allow-Credentials', true)
+    // ctx.set('X-Powered-By', 'Koa')
     if (ctx.request.method === 'OPTIONS') {
         ctx.status = 200
     } else {

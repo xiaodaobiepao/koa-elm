@@ -42,9 +42,14 @@ module.exports = class BaseComponent {
         let result
         try {
             const response = await fetch(url, requestConfig)
+            console.log('fetch')
+            console.log(response.ok)
+            if (response.ok === false) {
+                throw new Error('获取位置失败')
+            }
             if (resType === 'TEXT') {
                 result = await response.text()
-            } else if (type === 'JSON') {
+            } else if (resType === 'JSON') {
                 result = await response.json()
             } else {
                 result = await response.blob()

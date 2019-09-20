@@ -19,20 +19,23 @@ class AddressComponent extends BaseComponent {
 	async guessPosition(ctx){
 		return new Promise(async (resolve, reject) => {
 			let ip;
+			console.log('hehe')
+			console.log(ctx.ip)
 			const defaultIp = '180.158.102.141'; // 上海
 	 		if (process.env.NODE_ENV == 'development') {
 	 			ip = defaultIp;
 	 		} else {
 	 			try {
-                    console.log(ctx.connection)
+          console.log(ctx.connection)
 					// ip = ctx.headers['x-forwarded-for'] || 
 			 		// ctx.connection.remoteAddress || 
 			 		// ctx.socket.remoteAddress ||
 			 		// ctx.connection.socket.remoteAddress;
 			 		// const ipArr = ip.split(':');
-                     // ip = ipArr[ipArr.length -1] || defaultIp;
-                     console.log(ctx.ip)
-                     ip = ctx.ip
+					// ip = ipArr[ipArr.length -1] || defaultIp;
+					console.log('hehe')
+					console.log(ctx.ip)
+					ip = ctx.ip
 				} catch (e) {
 					ip = defaultIp;
 				}
@@ -59,7 +62,7 @@ class AddressComponent extends BaseComponent {
 			 			ip,
 			 			key: this.tencentkey4,
 			 		})
-		 		}
+				 }
 		 		if (result.status == 0) {
 		 			const cityInfo = {
 		 				lat: result.result.location.lat,

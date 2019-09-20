@@ -1,10 +1,13 @@
 const Cities = require('../../models/v1/cities')
-const pinyin = 'pinyin'
+const pinyin = require('pinyin')
 const AddressComponent = require('../../prototype/addressComponent')
 
 class City extends AddressComponent {
     constructor() {
         super()
+        this.getCity = this.getCity.bind(this)
+        // this.getCityName = this.getCityName.bind(this)
+        // this.getCityById = this.getCityById.bind(this)
     }
     async getCity(ctx, next) {
         const type = ctx.query.type
@@ -13,6 +16,7 @@ class City extends AddressComponent {
             switch (type) {
                 case 'guess':
                     const cityName = await this.getCityName(ctx)
+                    console.log(cityName)
                     cityInfo = await Cities.cityGuess(cityName)
                     break
                 case 'hot':
@@ -23,16 +27,20 @@ class City extends AddressComponent {
                     break
                 default:
                     ctx.body = {
-                        name: 'ERROR_QUERY_TYPE',
+                        status: 'fail',
                         errmsg: '参数错误'
                     }
                     return
             }
-            ctx.body = cityInfo
-        } catch (error) {
             ctx.body = {
-                name: 'ERROR_DATA',
-                message: '获取数据失败'
+                status: 'success',
+                cityInfo,
+            }
+        } catch (error) {
+            console.log(error)
+            ctx.body = {
+                status: 'fail',
+                errMsg: '获取数据失败'
             }
         }
     }
@@ -69,8 +77,10 @@ class City extends AddressComponent {
             pinyinArr.forEach(item => {
                 cityName += item[0]
             })
+            console.log(cityName)
             return cityName
         } catch (error) {
+            console.log(error)
             return 'beijing'
         }
     }

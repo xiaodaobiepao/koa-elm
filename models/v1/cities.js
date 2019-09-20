@@ -5,7 +5,7 @@ const citySchema = new mongoose.Schema({
     data: {}
 })
 
-citySchema.static.cityGuess = function(name) {
+citySchema.statics.cityGuess = function(name) {
     // 根据拼音找城市
     return new Promise(async (resolve, reject) => {
         const firstWord = name.substr(0, 1).toUpperCase()
@@ -25,14 +25,14 @@ citySchema.static.cityGuess = function(name) {
         } catch (error) {
             console.log(error)
             reject({
-                name: 'ERROR_DATA',
-                message: '查找数据失败'
+                status: 'fail',
+                errMsg: '获取数据失败'
             })
         }
     })
 }
 
-citySchema.static.cityHot = function() {
+citySchema.statics.cityHot = function() {
     return new Promise(async (resolve, reject) => {
         try {
             const city = await this.findOne()
@@ -47,7 +47,7 @@ citySchema.static.cityHot = function() {
     })
 }
 
-citySchema.static.cityGroup = function() {
+citySchema.statics.cityGroup = function() {
     return new Promise(async (resolve, reject) => {
         try {
             const city = await this.findOne()
@@ -66,7 +66,7 @@ citySchema.static.cityGroup = function() {
     })
 }
 
-citySchema.static.getCityById = function(id) {
+citySchema.statics.getCityById = function(id) {
     return new Promise(async (resolve, reject) => {
         try {
             const city = await this.findOne()

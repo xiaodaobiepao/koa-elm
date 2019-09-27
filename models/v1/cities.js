@@ -70,25 +70,27 @@ citySchema.statics.getCityById = function(id) {
     return new Promise(async (resolve, reject) => {
         try {
             const city = await this.findOne()
-            // Object.entries(city.data).forEach(city => {
-            //     const [key, value] = city
-            //     if
-            // })
             let keys = Object.keys(city.data)
-            let l = keys.length
-            for (let i=0; i < l; i++) {
+            let result
+            for (let i=0, l = keys.length; i < l; i++) {
                 if (keys[i] !== '_id' && keys[i] !== 'hotCities') {
-                    let city = city.data[keys[i]].find(city => city.id === id)
-                    if (!city) {
-                        resolve(city)
+                    let cityInfo = city.data[keys[i]].find(city => city.id + '' === id)
+                    if (cityInfo) {
+                        result = cityInfo
+                        break
                     }
                 }
+            }
+            if (result) {
+                resolve(result)
+            } else {
+                throw new Error('找不到')
             }
         } catch (error) {
             console.log(error)
             reject({
-                name: 'ERROR_DATA',
-                message: '查找数据失败'
+                status: 'fail',
+                errMsg: '查找数据失败'
             })
         }
     })

@@ -47,22 +47,25 @@ class City extends AddressComponent {
 
     async getCityById(ctx) {
         const cityid = ctx.params.id
+        console.log(cityid)
         if (isNaN(cityid)) {
             ctx.body = {
-                status: 0,
-                name: 'ERROR_PARAM_TYPE',
-                errmsg: '参数错误'
+                status: 'fail',
+                errMsg: '参数错误'
             }
             return
         }
         try {
             const cityInfo = await Cities.getCityById(cityid)
-            ctx.body = cityInfo
+            console.log(cityInfo)
+            ctx.body = {
+                status: 'success',
+                cityInfo,
+            }
         } catch (error) {
             ctx.body = {
-                status: 0,
-                name: 'ERROR_DATA',
-                errmsg: '获取数据失败'
+                status: 'fail',
+                errMsg: '获取数据失败'
             }
         }
     }
@@ -103,9 +106,8 @@ class City extends AddressComponent {
             const geohash = ctx.params.geohash || ''
             if (geohash.indexOf(',') === -1) {
                 ctx.body = {
-                    status: 0,
-                    type: 'ERROR_PARAMS',
-                    errmsg: '参数错误'
+                    status: 'fail',
+                    errMsg: '参数错误'
                 }
                 return
             }
@@ -119,13 +121,15 @@ class City extends AddressComponent {
                 longitude: poisArr[1],
                 name: result.result.formatted_adresses.recommend
             }
-            ctx.body = address
+            ctx.body = {
+                status: 'success',
+                address,
+            }
         } catch (error) {
             console.log(error)
             ctx.body = {
-                status: 0,
-                type: 'ERROR_DATA',
-                errmsg: '获取数据失败'
+                status: 'fail',
+                errMsg: '获取数据失败'
             }
         }
     }

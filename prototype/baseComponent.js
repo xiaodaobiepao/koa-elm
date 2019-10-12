@@ -64,7 +64,6 @@ module.exports = class BaseComponent {
     async getId(type) {
         if (!this.idList.includes(type)) {
             console.log('id类型错误')
-            throw new Error('id类型错误')
             return
         }
         try {

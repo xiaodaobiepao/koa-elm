@@ -1,11 +1,17 @@
 const router = require('koa-router')()
 const City = require('../controller/v1/cities')
+const Address = require('../controller/v1/address')
+const Carts = require('../controller/v1/carts')
 const SearchPlace = require('../controller/v1/search')
 const User = require('../controller/v2/user')
+const baseComponent = require('../prototype/baseComponent')
+const baseHandle = new baseComponent()
 
 router.get('/cities', City.getCity)
 router.get('/cities/:id', City.getCityById)
 router.get('/pois', SearchPlace.search)
 router.get('/user', User.getInfo)
+router.post('/addimg/:type', baseHandle.uploadImg)
+router.post('/carts/checkout', Carts.checkout)
 
 module.exports = router.routes()
